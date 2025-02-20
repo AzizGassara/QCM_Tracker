@@ -4,52 +4,59 @@
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#007bff">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>QCM Answer Tracker</title>
   <!-- Bootstrap CSS -->
-  <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-  />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
   <style>
     /* Highlight active option buttons */
     .option-button.active {
       background-color: #007bff;
       color: white;
     }
-    /* Add margin for easier tapping */
+    /* Additional spacing for buttons */
     .option-button {
       margin: 5px;
     }
   </style>
 </head>
 <body class="container py-5">
-  <h1 class="mb-4">QCM Answer Tracker</h1>
+  <h1 class="mb-4 text-center">QCM Answer Tracker</h1>
   
-  <!-- Answer Options -->
+  <!-- Answer Options Grid -->
   <div class="mb-4">
-    <p>Select your answer options (A to E):</p>
-    <div id="options" class="btn-group flex-wrap" role="group" aria-label="Answer Options">
-      <button type="button" class="btn btn-outline-primary btn-lg option-button" data-option="A">A</button>
-      <button type="button" class="btn btn-outline-primary btn-lg option-button" data-option="B">B</button>
-      <button type="button" class="btn btn-outline-primary btn-lg option-button" data-option="C">C</button>
-      <button type="button" class="btn btn-outline-primary btn-lg option-button" data-option="D">D</button>
-      <button type="button" class="btn btn-outline-primary btn-lg option-button" data-option="E">E</button>
+    <p class="text-center">Select your answer options (A to E):</p>
+    <div class="row justify-content-center">
+      <div class="col-4 text-center">
+        <button type="button" class="btn btn-outline-primary btn-lg option-button" data-option="A">A</button>
+      </div>
+      <div class="col-4 text-center">
+        <button type="button" class="btn btn-outline-primary btn-lg option-button" data-option="B">B</button>
+      </div>
+      <div class="col-4 text-center">
+        <button type="button" class="btn btn-outline-primary btn-lg option-button" data-option="C">C</button>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-6 text-center">
+        <button type="button" class="btn btn-outline-primary btn-lg option-button" data-option="D">D</button>
+      </div>
+      <div class="col-6 text-center">
+        <button type="button" class="btn btn-outline-primary btn-lg option-button" data-option="E">E</button>
+      </div>
     </div>
   </div>
-
-  <!-- Result Buttons -->
-  <div class="mb-4">
-    <button id="correctBtn" class="btn btn-success btn-lg mr-2">Correct</button>
-    <button id="incorrectBtn" class="btn btn-danger btn-lg mr-2">Incorrect</button>
-    <button id="partialBtn" class="btn btn-warning btn-lg">Partially Incorrect</button>
+  
+  <!-- Vertical Stack of Result Buttons -->
+  <div class="mb-4" style="max-width: 400px; margin: auto;">
+    <button id="correctBtn" class="btn btn-success btn-lg btn-block mb-3">Correct</button>
+    <button id="incorrectBtn" class="btn btn-danger btn-lg btn-block mb-3">Incorrect</button>
+    <button id="partialBtn" class="btn btn-warning btn-lg btn-block">Partially Incorrect</button>
   </div>
 
   <!-- Results Display -->
-  <div class="mb-4">
+  <div class="mb-4 text-center">
     <h4>Results</h4>
     <p>Correct Answers: <span id="correctCount">0</span></p>
     <p>Incorrect Answers: <span id="incorrectCount">0</span></p>
@@ -57,7 +64,7 @@
   </div>
 
   <!-- Show Stats Button -->
-  <div class="mb-4">
+  <div class="mb-4 text-center">
     <button id="showStatsBtn" class="btn btn-info btn-lg">Show Stats</button>
   </div>
 
@@ -114,20 +121,23 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-  <!-- JavaScript to manage app actions -->
+  <!-- Service Worker Registration for PWA functionality -->
   <script>
     if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(registration => {
-        console.log('ServiceWorker registered with scope:', registration.scope);
-      })
-      .catch(err => {
-        console.error('ServiceWorker registration failed:', err);
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => {
+            console.log('ServiceWorker registered with scope:', registration.scope);
+          })
+          .catch(err => {
+            console.error('ServiceWorker registration failed:', err);
+          });
       });
-  });
-}
+    }
+  </script>
 
+  <!-- JavaScript to manage app actions -->
+  <script>
     let correctCount = 0;
     let incorrectCount = 0;
     let partialCount = 0;
