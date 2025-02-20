@@ -1,1 +1,251 @@
-<h1>Hello</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QCM Answer Tracker</title>
+  <!-- Bootstrap CSS -->
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+  <style>
+    /* Highlight active option buttons */
+    .option-button.active {
+      background-color: #007bff;
+      color: white;
+    }
+    /* Add margin for easier tapping */
+    .option-button {
+      margin: 5px;
+    }
+  </style>
+</head>
+<body class="container py-5">
+  <h1 class="mb-4">QCM Answer Tracker</h1>
+  
+  <!-- Answer Options -->
+  <div class="mb-4">
+    <p>Select your answer options (A to E):</p>
+    <div id="options" class="btn-group flex-wrap" role="group" aria-label="Answer Options">
+      <button type="button" class="btn btn-outline-primary btn-lg option-button" data-option="A">A</button>
+      <button type="button" class="btn btn-outline-primary btn-lg option-button" data-option="B">B</button>
+      <button type="button" class="btn btn-outline-primary btn-lg option-button" data-option="C">C</button>
+      <button type="button" class="btn btn-outline-primary btn-lg option-button" data-option="D">D</button>
+      <button type="button" class="btn btn-outline-primary btn-lg option-button" data-option="E">E</button>
+    </div>
+  </div>
+
+  <!-- Result Buttons -->
+  <div class="mb-4">
+    <button id="correctBtn" class="btn btn-success btn-lg mr-2">Correct</button>
+    <button id="incorrectBtn" class="btn btn-danger btn-lg mr-2">Incorrect</button>
+    <button id="partialBtn" class="btn btn-warning btn-lg">Partially Incorrect</button>
+  </div>
+
+  <!-- Results Display -->
+  <div class="mb-4">
+    <h4>Results</h4>
+    <p>Correct Answers: <span id="correctCount">0</span></p>
+    <p>Incorrect Answers: <span id="incorrectCount">0</span></p>
+    <p>Partial Attempts: <span id="partialCount">0</span></p>
+  </div>
+
+  <!-- Show Stats Button -->
+  <div class="mb-4">
+    <button id="showStatsBtn" class="btn btn-info btn-lg">Show Stats</button>
+  </div>
+
+  <!-- Partial Modal -->
+  <div class="modal fade" id="partialModal" tabindex="-1" role="dialog" aria-labelledby="partialModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="partialModalLabel">Partial Answer - Indicate Correct Answers</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="partialModalClose">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Please indicate which options are actually correct for this question:</p>
+          <div id="partialOptions" class="btn-group flex-wrap" role="group" aria-label="Partial Options">
+            <!-- Options will be generated dynamically -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="partialConfirm" class="btn btn-primary">Confirm Partial</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Modal -->
+  <div class="modal fade" id="statsModal" tabindex="-1" role="dialog" aria-labelledby="statsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="statsModalLabel">Overall Stats</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="statsModalClose">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Total Questions Attempted: <span id="totalAttempts">0</span></p>
+          <p>Correct Answers: <span id="totalCorrect">0</span></p>
+          <p>Incorrect Answers: <span id="totalIncorrect">0</span></p>
+          <p>Partial Attempts: <span id="totalPartial">0</span></p>
+          <p>Total Score: <span id="totalScore">0</span></p>
+          <div id="partialDetails"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close Stats</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dependencies: jQuery, Popper.js, and Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- JavaScript to manage app actions -->
+  <script>
+    let correctCount = 0;
+    let incorrectCount = 0;
+    let partialCount = 0;
+    // Store each partial attempt as an object { userSelection: [...], correctSet: [...], score: number }
+    const partialAttempts = [];
+    // For storing originally selected options for the partial attempt
+    let originalPartialSelection = [];
+
+    // Toggle active state for main option buttons
+    document.querySelectorAll('.option-button').forEach(button => {
+      button.addEventListener('click', function() {
+        this.classList.toggle('active');
+      });
+    });
+
+    // Reset main option selections
+    function resetOptions() {
+      document.querySelectorAll('.option-button').forEach(button => {
+        button.classList.remove('active');
+      });
+    }
+
+    // Correct button event
+    document.getElementById('correctBtn').addEventListener('click', function() {
+      correctCount++;
+      document.getElementById('correctCount').textContent = correctCount;
+      resetOptions();
+    });
+
+    // Incorrect button event
+    document.getElementById('incorrectBtn').addEventListener('click', function() {
+      incorrectCount++;
+      document.getElementById('incorrectCount').textContent = incorrectCount;
+      resetOptions();
+    });
+
+    // Partially Incorrect button event
+    document.getElementById('partialBtn').addEventListener('click', function() {
+      // Capture current selection as user's initial answer
+      originalPartialSelection = Array.from(document.querySelectorAll('.option-button.active'))
+                                  .map(el => el.getAttribute('data-option'));
+      if (originalPartialSelection.length === 0) {
+        alert("Please select at least one option before marking partially incorrect.");
+        return;
+      }
+      // Populate the modal with all options (A to E)
+      const allOptions = ['A', 'B', 'C', 'D', 'E'];
+      const partialOptionsContainer = document.getElementById('partialOptions');
+      partialOptionsContainer.innerHTML = '';
+      allOptions.forEach(option => {
+        const wrapper = document.createElement('div');
+        wrapper.className = "custom-control custom-checkbox m-1";
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'custom-control-input';
+        checkbox.id = 'partial-' + option;
+        checkbox.value = option;
+        // Pre-check if this option was in the user's initial selection
+        if (originalPartialSelection.includes(option)) {
+          checkbox.checked = true;
+        }
+
+        const label = document.createElement('label');
+        label.className = 'custom-control-label btn btn-outline-primary btn-lg';
+        label.setAttribute('for', 'partial-' + option);
+        label.textContent = option;
+
+        wrapper.appendChild(checkbox);
+        wrapper.appendChild(label);
+        partialOptionsContainer.appendChild(wrapper);
+      });
+      $('#partialModal').modal('show');
+    });
+
+    // Confirm Partial modal event
+    document.getElementById('partialConfirm').addEventListener('click', function() {
+      // Get the full correct answer set from the modal checkboxes
+      const correctSet = Array.from(document.querySelectorAll('#partialOptions input[type="checkbox"]'))
+                           .filter(checkbox => checkbox.checked)
+                           .map(checkbox => checkbox.value);
+      if (correctSet.length === 0) {
+        alert("Please indicate at least one correct answer.");
+        return;
+      }
+      // Calculate the partial score as the ratio of correctly selected answers (from your initial selection)
+      // to the total number of options in the full correct set
+      const intersection = originalPartialSelection.filter(option => correctSet.includes(option));
+      const partialScore = intersection.length / correctSet.length;
+      partialCount++;
+      partialAttempts.push({
+        userSelection: originalPartialSelection.slice(),
+        correctSet: correctSet.slice(),
+        score: partialScore
+      });
+      document.getElementById('partialCount').textContent = partialCount;
+      alert("Partial Score: " + intersection.length + " / " + correctSet.length + " (" + (partialScore * 100).toFixed(1) + "%)");
+      $('#partialModal').modal('hide');
+      resetOptions();
+    });
+
+    // Show Stats button event
+    document.getElementById('showStatsBtn').addEventListener('click', function() {
+      const totalAttempts = correctCount + incorrectCount + partialCount;
+      document.getElementById('totalAttempts').textContent = totalAttempts;
+      document.getElementById('totalCorrect').textContent = correctCount;
+      document.getElementById('totalIncorrect').textContent = incorrectCount;
+      document.getElementById('totalPartial').textContent = partialCount;
+      
+      // Calculate the sum of partial scores
+      let sumPartial = 0;
+      partialAttempts.forEach(attempt => {
+        sumPartial += attempt.score;
+      });
+      
+      // Total Score is computed as: (each correct = 1) + (each partial attempt's fractional score)
+      const totalScore = correctCount + sumPartial;
+      document.getElementById('totalScore').textContent = totalScore.toFixed(2);
+
+      // Display details for each partial attempt
+      const partialDetails = document.getElementById('partialDetails');
+      partialDetails.innerHTML = "";
+      if (partialAttempts.length > 0) {
+        const list = document.createElement('ul');
+        partialAttempts.forEach((attempt, index) => {
+          const li = document.createElement('li');
+          li.textContent = "Attempt " + (index + 1) + ": User selected " + attempt.userSelection.join(', ') +
+                           " | Correct answers: " + attempt.correctSet.join(', ') +
+                           " | Score: " + (attempt.score * 100).toFixed(1) + "%";
+          list.appendChild(li);
+        });
+        partialDetails.appendChild(list);
+      }
+      $('#statsModal').modal('show');
+    });
+  </script>
+</body>
+</html>
