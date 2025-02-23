@@ -15,14 +15,107 @@
       background-color: #007bff;
       color: white;
     }
-    /* Additional spacing for buttons */
+    /* Make buttons bigger with minimal spacing */
     .option-button {
-      margin: 5px;
+      margin: 2px;
+      padding: 15px 25px;
+      font-size: 1.5rem;
     }
   </style>
 </head>
 <body class="container py-5">
   <h1 class="mb-4 text-center">QCM Answer Tracker</h1>
+  
+  <!-- Session Info Section -->
+  <div class="mb-4">
+    <div class="form-group">
+      <label for="lessonSelect">Select Lesson:</label>
+      <select id="lessonSelect" class="form-control">
+        <option value="">-- Select a Lesson --</option>
+        <!-- List of lessons -->
+        <option value="adénopathie superficielle">adénopathie superficielle</option>
+        <option value="anémies">anémies</option>
+        <option value="Appendicite aigu">Appendicite aigu</option>
+        <option value="Arret cardirespiratoire">Arret cardirespiratoire</option>
+        <option value="arthrite septique">arthrite septique</option>
+        <option value="asthme">asthme</option>
+        <option value="avc">avc</option>
+        <option value="BPCO">BPCO</option>
+        <option value="bronchiolite">bronchiolite</option>
+        <option value="brulure cutanée">brulure cutanée</option>
+        <option value="Cancer colo-rectales">Cancer colo-rectales</option>
+        <option value="cancer du cavum">cancer du cavum</option>
+        <option value="cancer du col de l'uterus">cancer du col de l'uterus</option>
+        <option value="cancer du sein">cancer du sein</option>
+        <option value="Cancers broncho-pulmonaire">Cancers broncho-pulmonaire</option>
+        <option value="cephalées">cephalées</option>
+        <option value="Coma">Coma</option>
+        <option value="contraception">contraception</option>
+        <option value="deshydratation aigu de l'enfant">deshydratation aigu de l'enfant</option>
+        <option value="diabete sucré">diabete sucré</option>
+        <option value="Diarhées chroniques">Diarhées chroniques</option>
+        <option value="Douleurs thoraciques aigues">Douleurs thoraciques aigues</option>
+        <option value="dyslipidemie">dyslipidemie</option>
+        <option value="dysphagie">dysphagie</option>
+        <option value="Endocardite infectieuse">Endocardite infectieuse</option>
+        <option value="epilepsie">epilepsie</option>
+        <option value="Etat de choc cardiogenique">Etat de choc cardiogenique</option>
+        <option value="etat de choc hémorragique">etat de choc hémorragique</option>
+        <option value="etats confusionelle">etats confusionelle</option>
+        <option value="fracture ouverte de la jambe">fracture ouverte de la jambe</option>
+        <option value="grossesse extra uterine">grossesse extra uterine</option>
+        <option value="Hydatidose Hepatique&pulmonaire">Hydatidose Hepatique&pulmonaire</option>
+        <option value="hypercalcemie">hypercalcemie</option>
+        <option value="Hypertension arterielle">Hypertension arterielle</option>
+        <option value="hyperthyroidie">hyperthyroidie</option>
+        <option value="hypothyroidie">hypothyroidie</option>
+        <option value="hématurie">hématurie</option>
+        <option value="Hémorragie digestive">Hémorragie digestive</option>
+        <option value="Hépatites virales">Hépatites virales</option>
+        <option value="ictères">ictères</option>
+        <option value="Infections des Voies aeriennes supérieures">Infections des Voies aeriennes supérieures</option>
+        <option value="infections respiratoires basses">infections respiratoires basses</option>
+        <option value="infections urinaires">infections urinaires</option>
+        <option value="insuffisance rénale aigue">insuffisance rénale aigue</option>
+        <option value="intoxications aigues">intoxications aigues</option>
+        <option value="ISA">ISA</option>
+        <option value="ischémie aigue des members">ischémie aigue des members</option>
+        <option value="IST">IST</option>
+        <option value="lithaises urinaires">lithaises urinaires</option>
+        <option value="maladie thrombotique veineuse">maladie thrombotique veineuse</option>
+        <option value="meningite">meningite</option>
+        <option value="metroraggie">metroraggie</option>
+        <option value="Occlusion intestinale aigue">Occlusion intestinale aigue</option>
+        <option value="oedeme">oedeme</option>
+        <option value="oeil rouge">oeil rouge</option>
+        <option value="P.E.C de la douleur aigu">P.E.C de la douleur aigu</option>
+        <option value="polyarthrite rhumatoide">polyarthrite rhumatoide</option>
+        <option value="polytraumatismes">polytraumatismes</option>
+        <option value="preeclampsie et eclampsie">preeclampsie et eclampsie</option>
+        <option value="purpura">purpura</option>
+        <option value="Péritonites aigues">Péritonites aigues</option>
+        <option value="schizophrenie">schizophrenie</option>
+        <option value="splénomegalie">splénomegalie</option>
+        <option value="syndrome coronarien aigu">syndrome coronarien aigu</option>
+        <option value="transfusion sanguin">transfusion sanguin</option>
+        <option value="Traumatisme cranien">Traumatisme cranien</option>
+        <option value="trouble acido-basique">trouble acido-basique</option>
+        <option value="Trouble anxieux">Trouble anxieux</option>
+        <option value="Trouble de l'humeur">Trouble de l'humeur</option>
+        <option value="trouble de l'hydratation , dyskaliémie">trouble de l'hydratation , dyskaliémie</option>
+        <option value="Tuberculose pulmonaire commune">Tuberculose pulmonaire commune</option>
+        <option value="tumeur de la prostate">tumeur de la prostate</option>
+        <option value="ulcère gastro-duodenal">ulcère gastro-duodenal</option>
+        <option value="vaccinations">vaccinations</option>
+        <option value="état septique grave">état septique grave</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="seriesName">Series of Questions:</label>
+      <input type="text" id="seriesName" class="form-control" placeholder="Enter series name">
+    </div>
+    <button id="saveSessionBtn" class="btn btn-primary btn-lg btn-block">Save Session</button>
+  </div>
   
   <!-- Answer Options Grid -->
   <div class="mb-4">
@@ -63,9 +156,18 @@
     <p>Partial Attempts: <span id="partialCount">0</span></p>
   </div>
 
-  <!-- Show Stats Button -->
+  <!-- Show Stats Button (for current session) -->
   <div class="mb-4 text-center">
-    <button id="showStatsBtn" class="btn btn-info btn-lg">Show Stats</button>
+    <button id="showStatsBtn" class="btn btn-info btn-lg">Show Current Session Stats</button>
+  </div>
+
+  <!-- New Buttons: Export, Import, and Dashboard -->
+  <div class="mb-4 text-center">
+    <button id="exportDataBtn" class="btn btn-secondary btn-lg mr-2">Export Data</button>
+    <button id="importDataBtn" class="btn btn-secondary btn-lg mr-2">Import Data</button>
+    <!-- Hidden file input for importing data -->
+    <input type="file" id="importFileInput" style="display:none" accept=".json">
+    <button id="dashboardBtn" class="btn btn-secondary btn-lg">Dashboard</button>
   </div>
 
   <!-- Partial Modal -->
@@ -91,27 +193,69 @@
     </div>
   </div>
 
-  <!-- Stats Modal -->
+  <!-- Stats Modal (for current session details) -->
   <div class="modal fade" id="statsModal" tabindex="-1" role="dialog" aria-labelledby="statsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="statsModalLabel">Overall Stats</h5>
+          <h5 class="modal-title" id="statsModalLabel">Current Session Stats</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="statsModalClose">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>Total Questions Attempted: <span id="totalAttempts">0</span></p>
-          <p>Correct Answers: <span id="totalCorrect">0</span></p>
-          <p>Incorrect Answers: <span id="totalIncorrect">0</span></p>
-          <p>Partial Attempts: <span id="totalPartial">0</span></p>
-          <p>Total Score: <span id="totalScore">0</span></p>
+          <p>Total Attempts: <span id="totalAttempts">0</span></p>
+          <p>Correct Count: <span id="totalCorrect">0</span></p>
+          <p>Incorrect Count: <span id="totalIncorrect">0</span></p>
+          <p>Partial Count: <span id="totalPartial">0</span></p>
+          <p>Average Score (0 to 20): <span id="totalScore">0</span></p>
+          <p>Total Time (sec): <span id="totalTime">0</span></p>
+          <p>Average Time per Question (sec): <span id="avgTime">0</span></p>
           <div id="partialDetails"></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close Stats</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Modal: Lists lessons and series with a "View Stats" button for each series -->
+  <div class="modal fade" id="dashboardModal" tabindex="-1" role="dialog" aria-labelledby="dashboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="dashboardModalLabel">Dashboard: Lessons and Series</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body" id="dashboardData">
+           <!-- Dashboard data (lessons & series with buttons) will be loaded here -->
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Series Stats Modal: Displays aggregated stats for a specific lesson-series -->
+  <div class="modal fade" id="seriesStatsModal" tabindex="-1" role="dialog" aria-labelledby="seriesStatsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="seriesStatsModalLabel">Series Stats</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body" id="seriesStatsData">
+            <!-- Series stats will be loaded here -->
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         </div>
       </div>
     </div>
   </div>
@@ -136,15 +280,18 @@
     }
   </script>
 
-  <!-- JavaScript to manage app actions -->
+  <!-- JavaScript to manage app actions and data storage -->
   <script>
     let correctCount = 0;
     let incorrectCount = 0;
     let partialCount = 0;
-    // Store each partial attempt as an object { userSelection: [...], correctSet: [...], score: number }
     const partialAttempts = [];
-    // For storing originally selected options for the partial attempt
     let originalPartialSelection = [];
+
+    // Time tracking variables
+    let sessionStartTime = null;
+    let lastAttemptTime = null;
+    let attemptDurations = []; // in milliseconds
 
     // Toggle active state for main option buttons
     document.querySelectorAll('.option-button').forEach(button => {
@@ -160,8 +307,22 @@
       });
     }
 
+    // Record the time of an attempt
+    function recordAttemptTime() {
+      let now = new Date();
+      if (!sessionStartTime) {
+        sessionStartTime = now;
+        lastAttemptTime = now;
+      } else {
+        let duration = now - lastAttemptTime;
+        attemptDurations.push(duration);
+        lastAttemptTime = now;
+      }
+    }
+
     // Correct button event
     document.getElementById('correctBtn').addEventListener('click', function() {
+      recordAttemptTime();
       correctCount++;
       document.getElementById('correctCount').textContent = correctCount;
       resetOptions();
@@ -169,6 +330,7 @@
 
     // Incorrect button event
     document.getElementById('incorrectBtn').addEventListener('click', function() {
+      recordAttemptTime();
       incorrectCount++;
       document.getElementById('incorrectCount').textContent = incorrectCount;
       resetOptions();
@@ -176,14 +338,13 @@
 
     // Partially Incorrect button event
     document.getElementById('partialBtn').addEventListener('click', function() {
-      // Capture current selection as user's initial answer
+      recordAttemptTime();
       originalPartialSelection = Array.from(document.querySelectorAll('.option-button.active'))
                                   .map(el => el.getAttribute('data-option'));
       if (originalPartialSelection.length === 0) {
         alert("Please select at least one option before marking partially incorrect.");
         return;
       }
-      // Populate the modal with all options (A to E)
       const allOptions = ['A', 'B', 'C', 'D', 'E'];
       const partialOptionsContainer = document.getElementById('partialOptions');
       partialOptionsContainer.innerHTML = '';
@@ -196,7 +357,6 @@
         checkbox.className = 'custom-control-input';
         checkbox.id = 'partial-' + option;
         checkbox.value = option;
-        // Pre-check if this option was in the user's initial selection
         if (originalPartialSelection.includes(option)) {
           checkbox.checked = true;
         }
@@ -215,16 +375,14 @@
 
     // Confirm Partial modal event
     document.getElementById('partialConfirm').addEventListener('click', function() {
-      // Get the full correct answer set from the modal checkboxes
-      const correctSet = Array.from(document.querySelectorAll('#partialOptions input[type="checkbox"]'))
+      let correctSet = Array.from(document.querySelectorAll('#partialOptions input[type="checkbox"]'))
                            .filter(checkbox => checkbox.checked)
                            .map(checkbox => checkbox.value);
       if (correctSet.length === 0) {
         alert("Please indicate at least one correct answer.");
         return;
       }
-      // Calculate the partial score as the ratio of correctly selected answers (from your initial selection)
-      // to the total number of options in the full correct set
+      recordAttemptTime();
       const intersection = originalPartialSelection.filter(option => correctSet.includes(option));
       const partialScore = intersection.length / correctSet.length;
       partialCount++;
@@ -239,32 +397,95 @@
       resetOptions();
     });
 
-    // Show Stats button event
+    // Save Session button event: collects all details (including timing) and saves to localStorage
+    document.getElementById('saveSessionBtn').addEventListener('click', function() {
+      const lesson = document.getElementById('lessonSelect').value;
+      const series = document.getElementById('seriesName').value;
+      if (!lesson || !series) {
+        alert("Please select a lesson and enter a series name.");
+        return;
+      }
+      const totalAttempts = correctCount + incorrectCount + partialCount;
+      let sumPartial = partialAttempts.reduce((sum, attempt) => sum + attempt.score, 0);
+      const rawScore = correctCount + sumPartial;
+      // Scale raw score to a 0-20 scale
+      const scaledScore = totalAttempts > 0 ? (rawScore / totalAttempts) * 20 : 0;
+      let totalTime = 0, averageAttemptTime = 0;
+      if (sessionStartTime && lastAttemptTime) {
+        totalTime = (lastAttemptTime - sessionStartTime) / 1000;
+      }
+      if (attemptDurations.length > 0) {
+        const sumDurations = attemptDurations.reduce((a, b) => a + b, 0);
+        averageAttemptTime = (sumDurations / attemptDurations.length) / 1000;
+      }
+      const session = {
+        lesson: lesson,
+        seriesName: series,
+        date: new Date().toISOString(),
+        correctCount: correctCount,
+        incorrectCount: incorrectCount,
+        partialCount: partialCount,
+        totalAttempts: totalAttempts,
+        rawScore: rawScore,
+        scaledScore: scaledScore,
+        partialAttempts: partialAttempts.slice(),
+        startTime: sessionStartTime ? sessionStartTime.toISOString() : null,
+        endTime: lastAttemptTime ? lastAttemptTime.toISOString() : null,
+        totalTime: totalTime,
+        attemptDurations: attemptDurations.map(d => d / 1000),
+        averageAttemptTime: averageAttemptTime
+      };
+      let sessions = JSON.parse(localStorage.getItem('qcmSessions') || '[]');
+      sessions.push(session);
+      localStorage.setItem('qcmSessions', JSON.stringify(sessions));
+      alert("Session saved:\nLesson: " + lesson + "\nSeries: " + series +
+            "\nTotal Attempts: " + totalAttempts +
+            "\nAverage Score (0-20): " + scaledScore.toFixed(2) +
+            "\nTotal Time: " + totalTime.toFixed(2) + " sec" +
+            "\nAverage Time per Question: " + averageAttemptTime.toFixed(2) + " sec");
+      
+      // Reset current session data
+      correctCount = 0;
+      incorrectCount = 0;
+      partialCount = 0;
+      partialAttempts.length = 0;
+      attemptDurations = [];
+      sessionStartTime = null;
+      lastAttemptTime = null;
+      document.getElementById('correctCount').textContent = "0";
+      document.getElementById('incorrectCount').textContent = "0";
+      document.getElementById('partialCount').textContent = "0";
+    });
+
+    // Show Stats button event (for current session)
     document.getElementById('showStatsBtn').addEventListener('click', function() {
       const totalAttempts = correctCount + incorrectCount + partialCount;
       document.getElementById('totalAttempts').textContent = totalAttempts;
       document.getElementById('totalCorrect').textContent = correctCount;
       document.getElementById('totalIncorrect').textContent = incorrectCount;
       document.getElementById('totalPartial').textContent = partialCount;
+      let sumPartial = partialAttempts.reduce((sum, attempt) => sum + attempt.score, 0);
+      const rawScore = correctCount + sumPartial;
+      const scaledScore = totalAttempts > 0 ? (rawScore / totalAttempts) * 20 : 0;
+      document.getElementById('totalScore').textContent = scaledScore.toFixed(2);
+      let totalTime = 0, averageAttemptTime = 0;
+      if (sessionStartTime && lastAttemptTime) {
+        totalTime = (lastAttemptTime - sessionStartTime) / 1000;
+      }
+      if (attemptDurations.length > 0) {
+        const sumDurations = attemptDurations.reduce((a, b) => a + b, 0);
+        averageAttemptTime = (sumDurations / attemptDurations.length) / 1000;
+      }
+      document.getElementById('totalTime').textContent = totalTime.toFixed(2);
+      document.getElementById('avgTime').textContent = averageAttemptTime.toFixed(2);
       
-      // Calculate the sum of partial scores
-      let sumPartial = 0;
-      partialAttempts.forEach(attempt => {
-        sumPartial += attempt.score;
-      });
-      
-      // Total Score is computed as: (each correct = 1) + (each partial attempt's fractional score)
-      const totalScore = correctCount + sumPartial;
-      document.getElementById('totalScore').textContent = totalScore.toFixed(2);
-
-      // Display details for each partial attempt
       const partialDetails = document.getElementById('partialDetails');
       partialDetails.innerHTML = "";
       if (partialAttempts.length > 0) {
         const list = document.createElement('ul');
         partialAttempts.forEach((attempt, index) => {
           const li = document.createElement('li');
-          li.textContent = "Attempt " + (index + 1) + ": User selected " + attempt.userSelection.join(', ') +
+          li.textContent = "Attempt " + (index + 1) + ": User selected: " + attempt.userSelection.join(', ') +
                            " | Correct answers: " + attempt.correctSet.join(', ') +
                            " | Score: " + (attempt.score * 100).toFixed(1) + "%";
           list.appendChild(li);
@@ -272,6 +493,104 @@
         partialDetails.appendChild(list);
       }
       $('#statsModal').modal('show');
+    });
+
+    // Export Data button event: exports full sessions data as JSON
+    document.getElementById('exportDataBtn').addEventListener('click', function() {
+      const sessions = localStorage.getItem('qcmSessions');
+      if (!sessions) {
+        alert("No data to export.");
+        return;
+      }
+      const blob = new Blob([sessions], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = "qcm_sessions.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+
+    // Import Data button event: overrides localStorage with imported JSON data
+    document.getElementById('importDataBtn').addEventListener('click', function() {
+      document.getElementById('importFileInput').click();
+    });
+    document.getElementById('importFileInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const importedSessions = JSON.parse(e.target.result);
+          localStorage.setItem('qcmSessions', JSON.stringify(importedSessions));
+          alert("Data imported successfully and local storage overridden.");
+        } catch (err) {
+          alert("Error importing data: " + err);
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    // Dashboard button event: shows a modal containing lessons and series with a "View Stats" button for each series
+    document.getElementById('dashboardBtn').addEventListener('click', function() {
+      const sessions = JSON.parse(localStorage.getItem('qcmSessions') || '[]');
+      if (sessions.length === 0) {
+        alert("No session data available.");
+        return;
+      }
+      let dashboard = {};
+      sessions.forEach(session => {
+        if (!dashboard[session.lesson]) {
+          dashboard[session.lesson] = new Set();
+        }
+        dashboard[session.lesson].add(session.seriesName);
+      });
+      let html = "<h5>Dashboard: Lessons and Series</h5>";
+      for (const lesson in dashboard) {
+        html += "<h6>" + lesson + "</h6><ul>";
+        dashboard[lesson].forEach(series => {
+          html += "<li>" + series + " <button class='btn btn-sm btn-primary viewSeriesBtn' data-lesson='" + lesson + "' data-series='" + series + "'>View Stats</button></li>";
+        });
+        html += "</ul>";
+      }
+      document.getElementById('dashboardData').innerHTML = html;
+      $('#dashboardModal').modal('show');
+    });
+
+    // Event delegation: when a "View Stats" button is clicked, show the series stats modal for that series
+    $(document).on('click', '.viewSeriesBtn', function() {
+      const lesson = $(this).data('lesson');
+      const series = $(this).data('series');
+      const sessions = JSON.parse(localStorage.getItem('qcmSessions') || '[]');
+      const filtered = sessions.filter(s => s.lesson === lesson && s.seriesName === series);
+      if (filtered.length === 0) {
+        alert("No data available for this series.");
+        return;
+      }
+      // Aggregate the stats
+      const totalAttempts = filtered.reduce((sum, s) => sum + s.totalAttempts, 0);
+      const totalCorrect = filtered.reduce((sum, s) => sum + s.correctCount, 0);
+      const totalIncorrect = filtered.reduce((sum, s) => sum + s.incorrectCount, 0);
+      const totalPartial = filtered.reduce((sum, s) => sum + s.partialCount, 0);
+      const totalRaw = filtered.reduce((sum, s) => {
+        const sessionRaw = s.correctCount + s.partialAttempts.reduce((acc, a) => acc + a.score, 0);
+        return sum + sessionRaw;
+      }, 0);
+      // Average score on a 0-20 scale:
+      const aggregatedScore = totalAttempts > 0 ? (totalRaw / totalAttempts) * 20 : 0;
+      const totalTime = filtered.reduce((sum, s) => sum + s.totalTime, 0);
+      const averageTime = totalAttempts > 0 ? totalTime / totalAttempts : 0;
+      
+      let html = "<h5>Stats for " + lesson + " - " + series + "</h5>";
+      html += "<p>Total Questions Answered: " + totalAttempts + "</p>";
+      html += "<p>Correct Answers: " + totalCorrect + "</p>";
+      html += "<p>Incorrect Answers: " + totalIncorrect + "</p>";
+      html += "<p>Partial Answers: " + totalPartial + "</p>";
+      html += "<p>Average Score (0 to 20): " + aggregatedScore.toFixed(2) + "</p>";
+      html += "<p>Average Time per Question (sec): " + averageTime.toFixed(2) + "</p>";
+      document.getElementById('seriesStatsData').innerHTML = html;
+      $('#seriesStatsModal').modal('show');
     });
   </script>
 </body>
